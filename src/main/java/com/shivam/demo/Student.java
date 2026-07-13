@@ -1,5 +1,9 @@
 package com.shivam.demo;
 
+import org.springframework.stereotype.Component;
+
+@Component
+
 public class Student{
     private String name;
     private int age;
@@ -10,6 +14,7 @@ public class Student{
         this.age = age;
         this.id = id;
     }
+    public Student(){}
 
     public String getName() {
         return name;
