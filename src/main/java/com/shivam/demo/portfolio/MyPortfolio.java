@@ -6,54 +6,56 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyPortfolio {
 
-    @GetMapping("/myself")
-    public String Myself(){
+    @GetMapping("/")
+    public String home(){
         return """
-        <h1>Shivam Kumar</h1>
+                <p>Welcome to home page.</p> <a href="/about">Home</a>
+                """;
+    }
 
-        <p>
-            Hello! I am a Computer Science student passionate about Java Backend Development
-            and problem solving.
-        </p>
+    @GetMapping("/about")
+    public String about() {
+        return """
+            <h1>About Me</h1>
+            <p>I am a Computer Science student interested in Java Backend Development.</p>
+            <a href="/education">education</a>
+            <a href="/skills">skills</a>
+            <a href="/project">project</a>
+            <a href="/">Home</a>
+            """;
+    }
 
-        <h2>Education</h2>
-        <ul>
-            <li>B.Tech in Computer Science and Engineering</li>
-            <li>Lovely Professional University</li>
-        </ul>
+    @GetMapping("/education")
+    public String education() {
+        return """
+            <h1>Education</h1>
+            <ul>
+                <li>B.Tech CSE</li>
+                <li>Lovely Professional University</li>
+            </ul>
+            <a href="/">Home</a>
+            """;
+    }
 
-        <h2>Skills</h2>
-        <ul>
-            <li>Java</li>
-            <li>Spring Boot</li>
-            <li>MySQL</li>
-            <li>HTML</li>
-            <li>Git & GitHub</li>
-        </ul>
+    @GetMapping("/skills")
+    public String skills() {
+        return """
+            <h1>Skills</h1>
+            <ul>
+                <li>Java</li>
+                <li>Spring Boot</li>
+                <li>MySQL</li>
+                <li>Git & GitHub</li>
+            </ul>
+            <a href="/">Home</a>
+            """;
+    }
 
-        <h2>Projects</h2>
-        <ul>
-            <li>Heart Disease Prediction System</li>
-            <li>Student Management System</li>
-            <li>Portfolio Website</li>
-        </ul>
-
-        <h2>Profiles</h2>
-        <ul>
-            <li>
-                GitHub:
-                <a href="https://github.com/Skstyle007">
-                    https://github.com/Skstyle007
-                </a>
-            </li>
-
-            <li>
-                LeetCode:
-                <a href="https://leetcode.com/u/Skstyle/">
-                    https://leetcode.com/u/Skstyle/
-                </a>
-            </li>
-        </ul>
-        """;
+    @GetMapping("/project")
+    public String myproject(){
+        return """
+                <li> heart disease prediction system</li>
+                <li>Portfolio Website</li>
+                """;
     }
 }
