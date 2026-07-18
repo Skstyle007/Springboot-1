@@ -3,6 +3,8 @@ package com.shivam.demo.studentserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class StudentService {
 
@@ -23,7 +25,35 @@ public class StudentService {
             return null;
         }
 
+        student.setCreatedAt(LocalDateTime.now());
+
+
         studentRepository.save(student);
         return student;
+    }
+
+    public Student getStudentById(int id) {
+        return studentRepository.findById(id).orElse(null);
+    }
+
+    public Student updateStudent(int id, Student student) {
+        Student existingStudent = studentRepository.findById(id).orElse(null);
+
+        if(existingStudent == null){
+            return null;
+        }
+        existingStudent.setName(student.getName());
+        existingStudent.setAge(student.getAge());
+        existingStudent.setDepartment(student.getDepartment());
+      //  existingStudent.setUpdateAt(LocalDateTime.now());
+        existingStudent.setUpdatedAt(LocalDateTime.now());
+        studentRepository.save(existingStudent);
+
+        return existingStudent;
+
+    }
+
+    public void deleteStudent(int id) {
+        studentRepository.deleteById(id);
     }
 }

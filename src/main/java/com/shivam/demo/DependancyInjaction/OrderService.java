@@ -9,7 +9,7 @@ public class OrderService {
 
  //   PaymentService paymentService;
 
-    @Autowired
+ //   @Autowired
     PaymentService paymentService;   //field injection
 
     OrderService(PaymentService paymentService){
@@ -18,7 +18,7 @@ public class OrderService {
     // if we have multiple cinstructot then called @aurtowired , not in single as autoactio;ly underetastnd
 
 
-    @Autowired
+   // @Autowired
     public void setPaymentService(PaymentService paymentService){
         this.paymentService = paymentService;
     }
