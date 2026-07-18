@@ -26,7 +26,7 @@ public class StudentService {
         }
 
         student.setCreatedAt(LocalDateTime.now());
-
+        student.setUpdatedAt(LocalDateTime.now());
 
         studentRepository.save(student);
         return student;
