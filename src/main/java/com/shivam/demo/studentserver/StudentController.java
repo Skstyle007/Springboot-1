@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.shivam.demo.studentserver.DTO.CreateStudentRequestDTO;
+import com.shivam.demo.studentserver.DTO.CreateStudentResponseDTO;
 
 @RestController
 public class StudentController {
@@ -12,20 +14,18 @@ public class StudentController {
 
     @Autowired
     public StudentController(StudentService studentService) {
-
         this.studentService  = studentService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student){
-
-        Student result = studentService.studentValidate(student);
+    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+        CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
         if(result == null){
-            return ResponseEntity.status(400).body(result);
+            return ResponseEntity.status(400).body("Invalid student data");
         }
-        return ResponseEntity.status(201).body(result);
 
+        return ResponseEntity.status(201).body(result);
     }
 
     @GetMapping("/getStudent/{id}")

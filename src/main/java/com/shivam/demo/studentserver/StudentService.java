@@ -2,6 +2,8 @@ package com.shivam.demo.studentserver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.shivam.demo.studentserver.DTO.CreateStudentRequestDTO;
+import com.shivam.demo.studentserver.DTO.CreateStudentResponseDTO;
 
 import java.time.LocalDateTime;
 
@@ -15,21 +17,29 @@ public class StudentService {
     }
 
 
-    public Student studentValidate(Student student){
-        int id = student.getId();
-        String name  = student.getName();
-        int age = student.getAge();
-        String department = student.getDepartment();
+    public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO){
+        Student student = mapToStudent(createStudentRequestDTO);
+        student = studentRepository.save(student);
+        return mapToResponseDTO(student);
+    }
 
-        if(id<0 || name == null || age<0 || department==null || age>100){
-            return null;
-        }
-
+    private Student mapToStudent(CreateStudentRequestDTO createStudentRequestDTO) {
+        Student student = new Student();
+        student.setName(createStudentRequestDTO.getName());
+        student.setAge(createStudentRequestDTO.getAge());
+        student.setDepartment(createStudentRequestDTO.getDepartment());
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
-
-        studentRepository.save(student);
         return student;
+    }
+
+    private CreateStudentResponseDTO mapToResponseDTO(Student student) {
+        CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
+        createStudentResponseDTO.setId(student.getId());
+        createStudentResponseDTO.setName(student.getName());
+        createStudentResponseDTO.setAge(student.getAge());
+        createStudentResponseDTO.setDepartment(student.getDepartment());
+        return createStudentResponseDTO;
     }
 
     public Student getStudentById(int id) {
